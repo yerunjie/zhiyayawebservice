@@ -1,23 +1,21 @@
 package com.example.zhiyaya.model;
 
 import lombok.Data;
+import lombok.ToString;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
+@ToString
 public class MonitorData {
-    private Integer id;
 
-    private Integer deviceId;
-
-    private Double weight;
-
-    private Integer intensity;
-
-    private Integer moisture;
-
-    private Float temp;
-
-    private Date createTime;
-
+    private int id;
+    private int deviceId;
+    private int fertility;
+    private int air;
+    private int intensity;
+    private int moisture;
+    private int touch;
+    private float temp;
+    private LocalDateTime createTime;
 }

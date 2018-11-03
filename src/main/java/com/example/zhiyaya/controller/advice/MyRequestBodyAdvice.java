@@ -1,3 +1,4 @@
+/*
 package com.example.zhiyaya.controller.advice;
 
 import com.example.zhiyaya.model.MonitorData;
@@ -30,7 +31,7 @@ public class MyRequestBodyAdvice implements RequestBodyAdvice {
         return new HttpInputMessage() {
             @Override
             public InputStream getBody() throws IOException {
-                return IOUtils.toInputStream(IOUtils.toString(httpInputMessage.getBody(),"UTF-8").replaceAll("__",","),"UTF-8");
+                return IOUtils.toInputStream(IOUtils.toString(httpInputMessage.getBody(), "UTF-8").replaceAll("__", ","), "UTF-8");
 
             }
 
@@ -46,3 +47,4 @@ public class MyRequestBodyAdvice implements RequestBodyAdvice {
         return o;
     }
 }
+*/

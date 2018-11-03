@@ -1,28 +1,20 @@
 package com.example.zhiyaya.controller;
 
 
+import com.example.zhiyaya.dto.TestBean;
 import com.example.zhiyaya.mapper.MonitorDataMapper;
 import com.example.zhiyaya.model.MonitorData;
 import com.example.zhiyaya.utils.Jdpush;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @RestController
 public class TestController {
 
     @Autowired
     private MonitorDataMapper monitorDataMapper;
-
-    @RequestMapping(value = "/v1/api/test_post/{id}", method = RequestMethod.POST)
-    public String post(@PathVariable("id") int id, @RequestBody MonitorData data) {
-        System.out.println(data);
-        data.setDeviceId(id);
-        data.setCreateTime(new Date());
-        //monitorDataMapper.insert(data);
-        return "post_" + id;
-    }
 
 
     @RequestMapping(value = "/v1/api/test_get", method = RequestMethod.GET)
@@ -36,5 +28,20 @@ public class TestController {
         System.out.println(123);
         Jdpush.testSendPush();
         return "get";
+    }
+
+    @RequestMapping(value = "/v1/api/monitor", method = RequestMethod.POST)
+    public String post(@RequestBody TestBean data) {
+        MonitorData monitorData = new MonitorData();
+        monitorData.setAir(data.getAir());
+        monitorData.setDeviceId(data.getId());
+        monitorData.setFertility(data.getF());
+        monitorData.setIntensity(data.getLight());
+        monitorData.setMoisture(data.getHumi());
+        monitorData.setTouch(data.getTouch());
+        monitorData.setTemp(data.getT());
+        monitorData.setCreateTime(LocalDateTime.now());
+        monitorDataMapper.insert(monitorData);
+        return "data_" + monitorData.getId();
     }
 }

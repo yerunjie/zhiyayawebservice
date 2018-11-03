@@ -1,117 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.zhiyaya.mapper.MonitorDataMapper" >
-  <resultMap id="BaseResultMap" type="com.example.zhiyaya.model.MonitorData" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="device_id" property="deviceId" jdbcType="INTEGER" />
-    <result column="weight" property="weight" jdbcType="DOUBLE" />
-    <result column="intensity" property="intensity" jdbcType="INTEGER" />
-    <result column="moisture" property="moisture" jdbcType="INTEGER" />
-    <result column="temp" property="temp" jdbcType="REAL" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, device_id, weight, intensity, moisture, temp, create_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from monitor_data
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from monitor_data
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.example.zhiyaya.model.MonitorData" >
-    insert into monitor_data (device_id, weight,
-      intensity, moisture, temp, 
-      create_time)
-    values (#{deviceId,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE},
-      #{intensity,jdbcType=INTEGER}, #{moisture,jdbcType=INTEGER}, #{temp,jdbcType=REAL}, 
-      #{createTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.zhiyaya.model.MonitorData" >
-    insert into monitor_data
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="deviceId != null" >
-        device_id,
-      </if>
-      <if test="weight != null" >
-        weight,
-      </if>
-      <if test="intensity != null" >
-        intensity,
-      </if>
-      <if test="moisture != null" >
-        moisture,
-      </if>
-      <if test="temp != null" >
-        temp,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="deviceId != null" >
-        #{deviceId,jdbcType=INTEGER},
-      </if>
-      <if test="weight != null" >
-        #{weight,jdbcType=DOUBLE},
-      </if>
-      <if test="intensity != null" >
-        #{intensity,jdbcType=INTEGER},
-      </if>
-      <if test="moisture != null" >
-        #{moisture,jdbcType=INTEGER},
-      </if>
-      <if test="temp != null" >
-        #{temp,jdbcType=REAL},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.zhiyaya.model.MonitorData" >
-    update monitor_data
-    <set >
-      <if test="deviceId != null" >
-        device_id = #{deviceId,jdbcType=INTEGER},
-      </if>
-      <if test="weight != null" >
-        weight = #{weight,jdbcType=DOUBLE},
-      </if>
-      <if test="intensity != null" >
-        intensity = #{intensity,jdbcType=INTEGER},
-      </if>
-      <if test="moisture != null" >
-        moisture = #{moisture,jdbcType=INTEGER},
-      </if>
-      <if test="temp != null" >
-        temp = #{temp,jdbcType=REAL},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.zhiyaya.model.MonitorData" >
-    update monitor_data
-    set device_id = #{deviceId,jdbcType=INTEGER},
-      weight = #{weight,jdbcType=DOUBLE},
-      intensity = #{intensity,jdbcType=INTEGER},
-      moisture = #{moisture,jdbcType=INTEGER},
-      temp = #{temp,jdbcType=REAL},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.example.zhiyaya.mapper.MonitorDataMapper">
+    <resultMap id="BaseResultMap" type="com.example.zhiyaya.model.MonitorData">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="device_id" property="deviceId" jdbcType="INTEGER"/>
+        <result column="fertility" property="fertility" jdbcType="INTEGER"/>
+        <result column="air" property="air" jdbcType="INTEGER"/>
+        <result column="touch" property="touch" jdbcType="INTEGER"/>
+        <result column="intensity" property="intensity" jdbcType="INTEGER"/>
+        <result column="moisture" property="moisture" jdbcType="INTEGER"/>
+        <result column="temp" property="temp" jdbcType="REAL"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.example.zhiyaya.model.MonitorData" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into monitor_data (device_id, fertility, air, intensity, moisture, temp, touch, create_time)
+        values (#{deviceId}, #{fertility}, #{air}, #{intensity}, #{moisture}, #{temp}, #{touch}, #{createTime})
+    </insert>
 </mapper>
