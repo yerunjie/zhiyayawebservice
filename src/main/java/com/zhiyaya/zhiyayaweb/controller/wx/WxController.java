@@ -3,15 +3,16 @@ package com.zhiyaya.zhiyayaweb.controller.wx;
 import com.zhiyaya.zhiyayaweb.constants.Role;
 import com.zhiyaya.zhiyayaweb.controller.BaseController;
 import com.zhiyaya.zhiyayaweb.dto.LoginResponse;
+import com.zhiyaya.zhiyayaweb.dto.wx.WxLoginRequest;
 import com.zhiyaya.zhiyayaweb.service.TokenService;
 import com.zhiyaya.zhiyayaweb.wx.WxApi;
 import com.zhiyaya.zhiyayaweb.wx.response.Code2Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -32,10 +33,10 @@ public class WxController extends BaseController {
     @Autowired
     private TokenService tokenService;
 
-    @RequestMapping(value = "/wx/token", method = RequestMethod.GET)
-    public LoginResponse login(@RequestParam("code") String code) {
-        logger.info("code: {}",code);
-        Code2Session code2Session = wxApi.code2Session(code, "authorization_code");
+    @RequestMapping(value = "/wx/token", method = RequestMethod.POST)
+    public LoginResponse login(@RequestBody WxLoginRequest request) {
+        logger.info("code: {}", request.getCode());
+        Code2Session code2Session = wxApi.code2Session(request.getCode(), "authorization_code");
         logger.info("code2Session: {}", code2Session.toString());
         String token = tokenService.generateToken(Role.User, 1);
         LoginResponse loginResponse = new LoginResponse();
