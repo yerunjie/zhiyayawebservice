@@ -2,6 +2,8 @@ package com.zhiyaya.zhiyayaweb.wx.configuration;
 
 import com.zhiyaya.zhiyayaweb.wx.WxApi;
 import feign.Feign;
+import feign.gson.GsonDecoder;
+import feign.gson.GsonEncoder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +30,7 @@ public class WxApiConfig {
                 .requestInterceptor(requestTemplate -> {
                     requestTemplate.query("appid", AppID).query("secret", AppSecret);
                 })
+                .encoder(new GsonEncoder()).decoder(new GsonDecoder())
                 .target(WxApi.class, "https://api.weixin.qq.com/sns");
         return wxApi;
     }
