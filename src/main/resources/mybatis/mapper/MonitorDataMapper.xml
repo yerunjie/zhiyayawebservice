@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.zhiyaya.mapper.MonitorDataMapper">
-    <resultMap id="BaseResultMap" type="com.example.zhiyaya.model.MonitorData">
+<mapper namespace="com.zhiyaya.zhiyayaweb.mapper.MonitorDataMapper">
+    <resultMap id="BaseResultMap" type="com.zhiyaya.zhiyayaweb.model.MonitorData">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="device_id" property="deviceId" jdbcType="INTEGER"/>
         <result column="fertility" property="fertility" jdbcType="INTEGER"/>
@@ -12,7 +12,7 @@
         <result column="temp" property="temp" jdbcType="REAL"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
-    <insert id="insert" parameterType="com.example.zhiyaya.model.MonitorData" useGeneratedKeys="true" keyColumn="id"
+    <insert id="insert" parameterType="com.zhiyaya.zhiyayaweb.model.MonitorData" useGeneratedKeys="true" keyColumn="id"
             keyProperty="id">
         insert into monitor_data (device_id, fertility, air, intensity, moisture, temp, touch, create_time)
         values (#{deviceId}, #{fertility}, #{air}, #{intensity}, #{moisture}, #{temp}, #{touch}, #{createTime})
