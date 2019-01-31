@@ -5,6 +5,8 @@ import com.zhiyaya.zhiyayaweb.dto.TestBean;
 import com.zhiyaya.zhiyayaweb.mapper.MonitorDataMapper;
 import com.zhiyaya.zhiyayaweb.model.MonitorData;
 import com.zhiyaya.zhiyayaweb.utils.Jdpush;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,14 +15,16 @@ import java.time.LocalDateTime;
 @RestController
 public class TestController {
 
+    private static final Logger logger = LoggerFactory.getLogger(TestController.class);
+
     @Autowired
     private MonitorDataMapper monitorDataMapper;
 
-
     @RequestMapping(value = "/v1/api/test_get", method = RequestMethod.GET)
-    public String get(@RequestParam("para") String para) {
-        System.out.println(para);
-        return "get" + para;
+    public String get(@RequestParam("token") String token) {
+        System.out.println(token);
+        logger.info(token);
+        return "get" + token;
     }
 
     @RequestMapping(value = "/v1/api/get", method = RequestMethod.GET)
